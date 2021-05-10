@@ -6,6 +6,7 @@ const CharacterList = () => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(0);
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -14,13 +15,14 @@ const CharacterList = () => {
         `https://rickandmortyapi.com/api/character?page=${page}`
       );
       setCharacters(res.data.results);
+      setLastPage(res.data.info.pages);
       setLoading(false);
     };
     fetchCharacters();
   }, [page]);
 
   return loading ? (
-    <h4>Loading...</h4>
+    <h4 className="text-center">Loading...</h4>
   ) : (
     <div className="container">
       <div className="row">
@@ -31,11 +33,36 @@ const CharacterList = () => {
           </p>
         </div>
       </div>
-      <div className="row justify-content-center">
+      <div className="row">
+        <div className="col d-flex justify-content-around">
+          <button
+            className="btn btn-outline-warning"
+            onClick={() => {
+              setPage(page - 1);
+            }}
+            disabled={page === 1}
+          >
+            <i className="fas fa-chevron-left" />
+          </button>
+          <span className="mx-4 fs-4">
+            {page} ... {lastPage}
+          </span>
+          <button
+            className="btn btn-outline-warning"
+            onClick={() => {
+              setPage(page + 1);
+            }}
+            disabled={page === lastPage}
+          >
+            <i className="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <div className="row d-flex justify-content-center my-4">
         {characters.map((character) => (
-          <Link to="/" className="col-sm">
+          <Link to="/" className="col-sm" key={character.id}>
             <div
-              className="card text-dark m-2 border-0"
+              className="card text-dark m-4 border-0"
               style={{ width: 12 + "rem", height: 17 + "rem" }}
             >
               <img
@@ -49,6 +76,31 @@ const CharacterList = () => {
             </div>
           </Link>
         ))}
+      </div>
+      <div className="row mb-4">
+        <div className="col d-flex justify-content-center">
+          <button
+            className="btn btn-outline-warning"
+            onClick={() => {
+              setPage(page - 1);
+            }}
+            disabled={page === 1}
+          >
+            <i className="fas fa-chevron-left" />
+          </button>
+          <span className="mx-4 fs-4">
+            {page} ... {lastPage}
+          </span>
+          <button
+            className="btn btn-outline-warning"
+            onClick={() => {
+              setPage(page + 1);
+            }}
+            disabled={page === lastPage}
+          >
+            <i className="fas fa-chevron-right"></i>
+          </button>
+        </div>
       </div>
     </div>
   );
