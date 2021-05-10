@@ -1,54 +1,42 @@
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
 
 import Logo from "../../images/Rick_and_Morty_logo.png";
 
 const Navbar = () => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-warning">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
-            <img classname="img-fluid" src={Logo} alt="logo" />{" "}
-          </a>
+          <Link className="navbar-brand" to="/">
+            <img src={Logo} alt="logo" />
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/">
-                  Features
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/">
-                  Pricing
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link disabled"
-                  href="/"
-                  tabindex="-1"
-                  aria-disabled="true"
-                >
-                  Disabled
-                </a>
-              </li>
-            </ul>
+          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div className="navbar-nav ml-auto">
+              <NavLink className="nav-link" aria-current="page" to="/">
+                Home
+              </NavLink>
+              <NavLink className="nav-link" to="/character-list">
+                Characters
+              </NavLink>
+              <NavLink className="nav-link" to="/episode-list">
+                Episodes
+              </NavLink>
+              <NavLink className="nav-link" to="/">
+                Locations
+              </NavLink>
+            </div>
           </div>
         </div>
       </nav>

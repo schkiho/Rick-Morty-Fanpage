@@ -11,15 +11,15 @@ const Landing = () => {
       <div className="container">
         <div className="row my-4">
           <div className="col-md-6 col-sm-12">
-            <Link to="/">
+            <Link to="/character-list">
               <img className="img-fluid rounded" src={Character} alt="" />
-              <h1 className="text-center">Character Guide</h1>
+              <h1 className="text-center">Characters Guide</h1>
             </Link>
           </div>
           <div className="col-md-6 col-sm-12">
-            <Link to="/">
+            <Link to="/episode-list">
               <img className="img-fluid rounded" src={Episode} alt="Episode" />
-              <h1 className="text-center">Episode Guide</h1>
+              <h1 className="text-center">Episodes Guide</h1>
             </Link>
           </div>
         </div>
