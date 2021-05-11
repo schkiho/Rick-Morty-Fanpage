@@ -72,15 +72,15 @@ const CharacterList = () => {
             key={character.id}
           >
             <div
-              className="card text-dark m-4 border-0"
+              className="card text-dark m-4 border border-2 border-warning bg-transparent"
               style={{ width: 12 + "rem", height: 17 + "rem" }}
             >
               <img
                 src={character.image}
-                className="card-img-top"
+                className="card-img-top p-2 img-fluid rounded"
                 alt="avatar"
               />
-              <div className="card-body text-center">
+              <div className="card-body text-center text-warning">
                 <p>{character.name}</p>
               </div>
             </div>

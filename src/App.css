@@ -8,3 +8,7 @@ a:hover {
   text-decoration: none;
   color: white;
 }
+
+.card {
+  background: rgba(247, 245, 245, 0.7);
+}
