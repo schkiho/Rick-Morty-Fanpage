@@ -33,9 +33,6 @@ const Navbar = () => {
               <NavLink className="nav-link" to="/episode-list">
                 Episodes
               </NavLink>
-              <NavLink className="nav-link" to="/">
-                Locations
-              </NavLink>
             </div>
           </div>
         </div>
