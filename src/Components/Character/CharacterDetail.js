@@ -68,7 +68,7 @@ const CharacterDetail = ({ match }) => {
       <h1 className="text-center">{name}</h1>
       <div className="row my-4">
         <div className="col-md-6 col-sm-12">
-          <img className="img-fluid" src={image} alt="avatar" />
+          <img className="img-fluid rounded" src={image} alt="avatar" />
         </div>
         <div className="col-md-6 col-sm-12">
           <table className="mt-4 fs-4" style={{ width: 100 + "%" }}>
@@ -101,6 +101,20 @@ const CharacterDetail = ({ match }) => {
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col text-center mt-4">
+          <h4 className="mb-4">
+            Here is a list of all episodes{" "}
+            <span className="text-warning">{name}</span> acts in
+          </h4>
+
+          {episode.map((item) => (
+            <Link to="/" className="btn btn-outline-warning m-1">
+              <span>{item.slice(40)}</span>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
