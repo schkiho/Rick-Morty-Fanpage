@@ -23,7 +23,7 @@ const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav ml-auto">
+            <div className="navbar-nav ml-auto fs-4">
               <NavLink className="nav-link" aria-current="page" to="/">
                 Home
               </NavLink>

@@ -6,6 +6,7 @@ import Spinner from "../Layout/Spinner";
 
 const CharacterDetail = ({ match }) => {
   const [character, setCharacter] = useState({
+    id: 0,
     name: "",
     status: "",
     species: "",
@@ -28,6 +29,7 @@ const CharacterDetail = ({ match }) => {
       );
 
       setCharacter({
+        id: res.data.id,
         name: res.data.name,
         status: res.data.status,
         species: res.data.species,
@@ -45,6 +47,7 @@ const CharacterDetail = ({ match }) => {
   }, [match]);
 
   const {
+    id,
     name,
     status,
     species,
@@ -55,8 +58,6 @@ const CharacterDetail = ({ match }) => {
     location,
     episode,
   } = character;
-
-  console.log(episode);
 
   return loading && character === {} ? (
     <Spinner />
@@ -106,7 +107,7 @@ const CharacterDetail = ({ match }) => {
           </table>
         </div>
       </div>
-      <div className="row">
+      <div className="row" key={id}>
         <div className="col text-center mt-4">
           <h4 className="mb-4">
             Here is a list of all episodes{" "}
@@ -114,7 +115,11 @@ const CharacterDetail = ({ match }) => {
           </h4>
 
           {episode.map((item) => (
-            <Link to="/" className="btn btn-outline-warning m-1" key={item.id}>
+            <Link
+              to={`/episode/${item.slice(40)}`}
+              className="btn btn-outline-warning m-1"
+              key={item.id}
+            >
               <span>{item.slice(40)}</span>
             </Link>
           ))}
