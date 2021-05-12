@@ -62,7 +62,10 @@ const CharacterDetail = ({ match }) => {
     <Spinner />
   ) : (
     <div className="container my-4 px-4">
-      <Link to="/character-list" className="btn btn-lg btn-outline-warning">
+      <Link
+        to="/character-list"
+        className="btn btn-lg btn-outline-warning mb-2"
+      >
         Back
       </Link>
       <h1 className="text-center">{name}</h1>
@@ -111,7 +114,7 @@ const CharacterDetail = ({ match }) => {
           </h4>
 
           {episode.map((item) => (
-            <Link to="/" className="btn btn-outline-warning m-1">
+            <Link to="/" className="btn btn-outline-warning m-1" key={item.id}>
               <span>{item.slice(40)}</span>
             </Link>
           ))}

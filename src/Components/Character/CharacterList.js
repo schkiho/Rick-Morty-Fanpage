@@ -64,7 +64,7 @@ const CharacterList = () => {
             key={character.id}
           >
             <div
-              className="card text-dark m-4 border border-2 border-warning bg-transparent"
+              className="card m-4 border border-2 border-warning bg-transparent"
               style={{ width: 12 + "rem", height: 17 + "rem" }}
             >
               <img
