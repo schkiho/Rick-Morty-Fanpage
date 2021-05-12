@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import Spinner from "../Layout/Spinner";
+import Pagination from "../Layout/Pagination";
 
 const CharacterList = () => {
   const [characters, setCharacters] = useState([]);
@@ -23,6 +24,14 @@ const CharacterList = () => {
     fetchCharacters();
   }, [page]);
 
+  const getPrevPage = () => {
+    setPage(page - 1);
+  };
+
+  const getNextPage = () => {
+    setPage(page + 1);
+  };
+
   return loading ? (
     <Spinner />
   ) : (
@@ -40,29 +49,12 @@ const CharacterList = () => {
         </div>
       </div>
       <div className="row">
-        <div className="col d-flex justify-content-around">
-          <button
-            className="btn btn-outline-warning"
-            onClick={() => {
-              setPage(page - 1);
-            }}
-            disabled={page === 1}
-          >
-            <i className="fas fa-chevron-left" />
-          </button>
-          <span className="mx-4 fs-4">
-            {page} ... {info.pages}
-          </span>
-          <button
-            className="btn btn-outline-warning"
-            onClick={() => {
-              setPage(page + 1);
-            }}
-            disabled={page === info.pages}
-          >
-            <i className="fas fa-chevron-right"></i>
-          </button>
-        </div>
+        <Pagination
+          page={page}
+          info={info}
+          nextPage={getNextPage}
+          prevPage={getPrevPage}
+        />
       </div>
       <div className="row my-4">
         {characters.map((character) => (
@@ -88,29 +80,12 @@ const CharacterList = () => {
         ))}
       </div>
       <div className="row mb-4">
-        <div className="col d-flex justify-content-center">
-          <button
-            className="btn btn-outline-warning"
-            onClick={() => {
-              setPage(page - 1);
-            }}
-            disabled={page === 1}
-          >
-            <i className="fas fa-chevron-left" />
-          </button>
-          <span className="mx-4 fs-4">
-            {page} ... {info.pages}
-          </span>
-          <button
-            className="btn btn-outline-warning"
-            onClick={() => {
-              setPage(page + 1);
-            }}
-            disabled={page === info.pages}
-          >
-            <i className="fas fa-chevron-right"></i>
-          </button>
-        </div>
+        <Pagination
+          page={page}
+          info={info}
+          nextPage={getNextPage}
+          prevPage={getPrevPage}
+        />
       </div>
     </div>
   );
