@@ -13,6 +13,10 @@ const EpisodeDetail = ({ match }) => {
     characters: [],
   });
   const [loading, setLoading] = useState(false);
+  const [favorits] = useState(() => {
+    const localData = localStorage.getItem("favorits");
+    return localData ? JSON.parse(localData) : {};
+  });
 
   useEffect(() => {
     const id = match.params.id;
@@ -83,7 +87,7 @@ const EpisodeDetail = ({ match }) => {
           >
             <div
               className="card m-4 border border-2 border-warning bg-transparent"
-              style={{ width: 10 + "rem", height: 14 + "rem" }}
+              style={{ width: 12 + "rem", height: 18 + "rem" }}
             >
               <img
                 src={item.image}
@@ -92,6 +96,9 @@ const EpisodeDetail = ({ match }) => {
               />
               <div className="card-body text-center text-warning">
                 <p>{item.name}</p>
+                {favorits.charId === item.id && favorits.isFavorite === true ? (
+                  <i className="fas fa-heart text-danger" />
+                ) : null}
               </div>
             </div>
           </Link>

@@ -18,6 +18,11 @@ const CharacterDetail = ({ match }) => {
     episode: [],
   });
   const [loading, setLoading] = useState(false);
+  const [favorits, setFavorits] = useState(() => {
+    const localData = localStorage.getItem("favorits");
+
+    return localData ? JSON.parse(localData) : {};
+  });
 
   useEffect(() => {
     const id = match.params.id;
@@ -39,12 +44,23 @@ const CharacterDetail = ({ match }) => {
         location: res.data.location.name,
         image: res.data.image,
         episode: res.data.episode,
+        favorite: false,
       });
 
       setLoading(false);
     };
     fetchSingleCharacter();
   }, [match]);
+
+  useEffect(() => {
+    localStorage.setItem("favorits", JSON.stringify(favorits));
+  }, [favorits]);
+
+  const onClick = () =>
+    setFavorits({
+      charId: character.id,
+      isFavorite: !favorits.isFavorite,
+    });
 
   const {
     id,
@@ -103,12 +119,26 @@ const CharacterDetail = ({ match }) => {
                 <td>Location:</td>
                 <td>{location}</td>
               </tr>
+              <tr>
+                <td>Favorit:</td>
+                <td>
+                  {favorits.charId === id && favorits.isFavorite === true ? (
+                    <i className="fas fa-heart text-danger" />
+                  ) : null}
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div className="row" key={id}>
-        <div className="col text-center mt-4">
+      <div className="row">
+        <div className="col text-center mt-4" key={id}>
+          <button
+            className="btn btn-lg btn-outline-warning mb-4"
+            onClick={onClick}
+          >
+            Mark this character as favorite
+          </button>
           <h4 className="mb-4">
             Here is a list of all episodes{" "}
             <span className="text-warning">{name}</span> acts in
@@ -118,7 +148,7 @@ const CharacterDetail = ({ match }) => {
             <Link
               to={`/episode/${item.slice(40)}`}
               className="btn btn-outline-warning m-1"
-              key={item.id}
+              key={item.slice(40)}
             >
               <span>{item.slice(40)}</span>
             </Link>

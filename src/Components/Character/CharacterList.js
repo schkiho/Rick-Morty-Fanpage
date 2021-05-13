@@ -10,6 +10,10 @@ const CharacterList = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [info, setInfo] = useState({});
+  const [favorits] = useState(() => {
+    const localData = localStorage.getItem("favorits");
+    return localData ? JSON.parse(localData) : {};
+  });
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -65,7 +69,7 @@ const CharacterList = () => {
           >
             <div
               className="card m-4 border border-2 border-warning bg-transparent"
-              style={{ width: 12 + "rem", height: 17 + "rem" }}
+              style={{ width: 12 + "rem", height: 18 + "rem" }}
             >
               <img
                 src={character.image}
@@ -74,6 +78,10 @@ const CharacterList = () => {
               />
               <div className="card-body text-center text-warning">
                 <p>{character.name}</p>
+                {favorits.charId === character.id &&
+                favorits.isFavorite === true ? (
+                  <i className="fas fa-heart text-danger" />
+                ) : null}
               </div>
             </div>
           </Link>
